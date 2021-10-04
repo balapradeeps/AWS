@@ -1,3 +1,8 @@
-variable "github_personal_access_token" {
-    type = string
+variable "github_pat" {
+  type = string
+}
+
+variable "app_name" {
+  type    = string
+  default = "serverless-webapp"
 }
