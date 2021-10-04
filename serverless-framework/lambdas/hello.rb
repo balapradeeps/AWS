@@ -2,8 +2,7 @@ require 'json'
 
 def hello(event:, context:)
   begin
-    puts "Received Request: #{event}"
-    { statusCode: 200, body: JSON.generate("Go Serverless v1.0! Your function executed successfully! #{event['body']}") }
+    { statusCode: 200, body: JSON.generate("Function executed successfully!") }
   rescue StandardError => e  
     puts e.message  
     puts e.backtrace.inspect  

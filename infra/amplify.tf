@@ -1,7 +1,3 @@
-provider "aws" {
-  region = "eu-west-3"
-}
-
 resource "aws_amplify_app" "front_app" {
   name         = "front"
   repository   = "https://github.com/Tiino1/serverless-webapp"
