@@ -8,4 +8,5 @@
 - `yo serverless-policy` to generate the minimal policy
 - `serverless deploy` to deploy infra
 - `serverless invoke -f <my_function>` to test a deployed function
+- `serverless invoke local -f <my_function>` to test a local function
 - `serverless remove` to remove infra
