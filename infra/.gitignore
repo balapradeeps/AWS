@@ -2,3 +2,5 @@ clouds.yaml
 *.terraform/
 *.tfstate
 *.tfstate.backup
+*.terraform.lock
+*.terraform.lock.hcl
