@@ -9,6 +9,7 @@
 - `bundle install` in the same directory of Gemfile
 - `gem install ox`
 - `gem install aws-sdk`
+- `gem install mongo`
 - `apt-get install npm`
 - `npm install -g serverless`
 
@@ -27,3 +28,10 @@
 - `serverless invoke -f <my_function>`
 ### test localy
 - `serverless invoke local -f <my_function> -p <my_event_data.json> -c <my_context_data.json>`
+### SDK references
+aws sdk Developer Guide
+```https://docs.aws.amazon.com/sdk-for-ruby/v3/developer-guide/examples.html```
+aws sdk Documentation
+```https://docs.aws.amazon.com/sdk-for-ruby/v2/api/```
+mongodb sdk Documentation
+```https://www.rubydoc.info/gems/mongo/Mongo/Collection```

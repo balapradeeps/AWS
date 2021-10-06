@@ -9,7 +9,11 @@ provider:
   runtime: ruby2.7
   lambdaHashingVersion: 20201221
   timeout: 5
-  region: eu-west-3
+  region: ${file(env.yml):AMAZON_REGION}
+  environment:
+    AWS_ACCESS_KEY_ID: ${file(env.yml):AWS_ACCESS_KEY_ID}
+    AWS_SECRET_ACCESS_KEY: ${file(env.yml):AWS_SECRET_ACCESS_KEY}
+    AMAZON_REGION: ${file(env.yml):AMAZON_REGION}
 
 functions:
   hello:
