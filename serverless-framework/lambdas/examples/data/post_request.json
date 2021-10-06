@@ -1,0 +1,12 @@
+{
+    "pathParameters": {
+        "id": "tinowomanocry"
+    },
+    "body": {
+        "number": 9000
+    },
+    "queryStringParameters": {
+        "hit": "Booom",
+        "hot": "optionnal parameter, you test with and without it"
+    }
+}

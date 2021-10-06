@@ -16,25 +16,28 @@ provider:
     AMAZON_REGION: ${file(env.yml):AMAZON_REGION}
 
 functions:
-  hello:
-    handler: lambdas/hello.hello
+  example_hello_world:
+    handler: lambdas/examples/hello_world.hello_world     # function to call
     events:
       - http:
-          path: hello
-          method: post
+          path: hello     # endpoint
+          method: post    # http verb
 
-  retrieve_id:
-    handler: lambdas/retrieve_id.retrieve_id
+  example_post_request:
+    handler: lambdas/examples/post_request.post_request
     events:
       - http:
-          path: id/{id}
-          method: get
+          path: id/{id}   # url-named parameter id
+          method: post
           request:
             parameters:
               paths:
-                id: true
+                id: true  # required parameter
+              querystrings:
+                hat: true # required parameter
+
   mutation_create:
-    role: dynampdbIAMRole
+    role: dynamodbIAMRole   # aws role policy, declared in this file in resource.Resources.dynamodbIAMRole
     handler: lambdas/mutation_create.mutation_create
     events:
       - http:
@@ -43,7 +46,7 @@ functions:
 
 resources:
   Resources:
-    dynampdbIAMRole:
+    dynamodbIAMRole:
       Type: AWS::IAM::Role
       Properties:
         Path: /nlpf/
