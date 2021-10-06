@@ -29,3 +29,36 @@ functions:
             parameters:
               paths:
                 id: true
+  mutation_create:
+    role: dynampdbIAMRole
+    handler: lambdas/mutation_create.mutation_create
+    events:
+      - http:
+          path: mutation
+          method: post
+
+resources:
+  Resources:
+    dynampdbIAMRole:
+      Type: AWS::IAM::Role
+      Properties:
+        Path: /nlpf/
+        RoleName: dynamodb_IAM_role
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service:
+                  - lambda.amazonaws.com
+              Action: sts:AssumeRole
+        Policies:
+          - PolicyName: myPolicyName
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: Allow
+                  Action:
+                    - dynamodb:ListTables
+                    - dynamodb:Scan
+                  Resource: "*"

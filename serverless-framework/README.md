@@ -7,6 +7,8 @@
 - `apt-get install ruby-full`
 - `gem install bundle`
 - `bundle install` in the same directory of Gemfile
+- `gem install ox`
+- `gem install aws-sdk`
 - `apt-get install npm`
 - `npm install -g serverless`
 
