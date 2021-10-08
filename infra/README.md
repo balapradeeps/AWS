@@ -10,3 +10,4 @@
 
 # Notes
 The app build will be queued at AWS, but it can be long
+terraform plan -var-file="configs.tfvars"
