@@ -14,20 +14,26 @@ provider:
     AWS_ACCESS_KEY_ID: ${file(env.yml):AWS_ACCESS_KEY_ID}
     AWS_SECRET_ACCESS_KEY: ${file(env.yml):AWS_SECRET_ACCESS_KEY}
     AMAZON_REGION: ${file(env.yml):AMAZON_REGION}
+    DB_HOST: ${file(env.yml):DB_HOST}
+    DB_NAME: ${file(env.yml):DB_NAME}
+    DB_REPLICA_SET_NAME: ${file(env.yml):DB_REPLICA_SET_NAME}
+    DB_USER_NAME: ${file(env.yml):DB_USER_NAME}
+    DB_USER_PASSWORD: ${file(env.yml):DB_USER_PASSWORD}
+    DB_SSL_CA_CERT: ${file(env.yml):DB_SSL_CA_CERT}
 
 functions:
   example_hello_world:
     handler: lambdas/examples/hello_world.hello_world     # function to call
     events:
       - http:
-          path: hello     # endpoint
+          path: test/hello     # endpoint
           method: post    # http verb
 
   example_post_request:
     handler: lambdas/examples/post_request.post_request
     events:
       - http:
-          path: id/{id}   # url-named parameter id
+          path: test/id/{id}   # url-named parameter id
           method: post
           request:
             parameters:
@@ -35,6 +41,13 @@ functions:
                 id: true  # required parameter
               querystrings:
                 hat: true # required parameter
+
+  example_with_mongo:
+    handler: lambda/examples/mongo
+    events:
+      - http:
+          path: test/mongo
+          method: post
 
   mutation_create:
     role: dynamodbIAMRole   # aws role policy, declared in this file in resource.Resources.dynamodbIAMRole
