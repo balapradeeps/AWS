@@ -42,6 +42,7 @@ resource "aws_docdb_cluster" "database_cluster" {
   skip_final_snapshot    = true
   apply_immediately = true
   #vpc_security_group_ids = ["securitygroupsids"]
+  availability_zones = [yamldecode(file("../env.yml"))["AMAZON_AZ_1"]]
 }
 
 resource "aws_docdb_cluster_instance" "database" {
