@@ -12,7 +12,7 @@ provider:
   lambdaHashingVersion: 20201221
   timeout: 5
   region: ${file(../env.yml):AMAZON_REGION}
-  stage: prod
+  stage: production
   environment:
     AMAZON_REGION: ${file(../env.yml):AMAZON_REGION}
     DB_HOST: ${file(../env.yml):DB_HOST}
@@ -64,7 +64,7 @@ resources:
       Type: AWS::IAM::Role
       Properties:
         Path: /nlpf/
-        RoleName: dynamodb_IAM_role
+        RoleName: dynamodb_iam_role
         AssumeRolePolicyDocument:
           Version: '2012-10-17'
           Statement:
