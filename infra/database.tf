@@ -49,4 +49,5 @@ resource "aws_docdb_cluster_instance" "database" {
   cluster_identifier = resource.aws_docdb_cluster.database_cluster.id
   instance_class     = "db.t3.medium"
   availability_zone = yamldecode(file("../env.yml"))["AMAZON_AZ_1"]
+  ca_cert_identifier = aws_acm_certificate.db_cert.id
 }
