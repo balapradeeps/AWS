@@ -11,8 +11,11 @@ provider:
   runtime: ruby2.7
   lambdaHashingVersion: 20201221
   timeout: 5
+  stage: production   # used by API Gateway (1 gateway per stage)
   region: ${file(../env.yml):AMAZON_REGION}
-  stage: production
+  vpc:
+    subnetIds:
+      - ${ssm:/subnet/id}
   environment:
     AMAZON_REGION: ${file(../env.yml):AMAZON_REGION}
     DB_HOST: ${file(../env.yml):DB_HOST}
@@ -21,6 +24,7 @@ provider:
     DB_USER_NAME: ${file(../env.yml):DB_USER_NAME}
     DB_USER_PASSWORD: ${file(../env.yml):DB_USER_PASSWORD}
     DB_SSL_CA_CERT: ${file(../env.yml):DB_SSL_CA_CERT}
+    TEST: ${ssm:/db/dns_address}
 
 functions:
   example_hello_world:
