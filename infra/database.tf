@@ -1,6 +1,8 @@
+/*
 resource "aws_security_group" "allow_db_connections" {
   name   = "sec_group_allow_db_connections"
   vpc_id = aws_vpc.main.id
+  revoke_rules_on_delete = true
 
   ingress = [
     {
@@ -11,7 +13,7 @@ resource "aws_security_group" "allow_db_connections" {
       cidr_blocks      = [aws_vpc.main.cidr_block]
       ipv6_cidr_blocks = [aws_vpc.main.ipv6_cidr_block]
       self             = true
-      security_groups  = []
+      security_groups  = ["wtregergrqwgwrgwq"]
       prefix_list_ids  = []
     }
   ]
@@ -25,16 +27,21 @@ resource "aws_security_group" "allow_db_connections" {
       cidr_blocks      = ["0.0.0.0/0"]
       ipv6_cidr_blocks = ["::/0"]
       self             = true
-      security_groups  = []
+      security_groups  = ["wtregergrqwgwrgwq"]
       prefix_list_ids  = []
     }
   ]
 }
+*/
 
 resource "aws_docdb_cluster" "database_cluster" {
   master_username        = yamldecode(file("../env.yml"))["DB_USER_NAME"]
   master_password        = yamldecode(file("../env.yml"))["DB_USER_PASSWORD"]
-  vpc_security_group_ids = ["securitygroupsids"]
+  final_snapshot_identifier = false
+  backup_retention_period = 0
+  skip_final_snapshot    = true
+  apply_immediately = true
+  #vpc_security_group_ids = ["securitygroupsids"]
 }
 
 resource "aws_docdb_cluster_instance" "database" {
