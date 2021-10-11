@@ -12,6 +12,7 @@ provider:
   lambdaHashingVersion: 20201221
   timeout: 5
   region: ${file(../env.yml):AMAZON_REGION}
+  stage: prod
   environment:
     AMAZON_REGION: ${file(../env.yml):AMAZON_REGION}
     DB_HOST: ${file(../env.yml):DB_HOST}
