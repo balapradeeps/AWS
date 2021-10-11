@@ -4,22 +4,22 @@ frameworkVersion: '2'
 
 configValidationMode: error
 
+projectDir: ../   # because env.yml is defined in ../
+
 provider:
   name: aws
   runtime: ruby2.7
   lambdaHashingVersion: 20201221
   timeout: 5
-  region: ${file(env.yml):AMAZON_REGION}
+  region: ${file(../env.yml):AMAZON_REGION}
   environment:
-    AWS_ACCESS_KEY_ID: ${file(env.yml):AWS_ACCESS_KEY_ID}
-    AWS_SECRET_ACCESS_KEY: ${file(env.yml):AWS_SECRET_ACCESS_KEY}
-    AMAZON_REGION: ${file(env.yml):AMAZON_REGION}
-    DB_HOST: ${file(env.yml):DB_HOST}
-    DB_NAME: ${file(env.yml):DB_NAME}
-    DB_REPLICA_SET_NAME: ${file(env.yml):DB_REPLICA_SET_NAME}
-    DB_USER_NAME: ${file(env.yml):DB_USER_NAME}
-    DB_USER_PASSWORD: ${file(env.yml):DB_USER_PASSWORD}
-    DB_SSL_CA_CERT: ${file(env.yml):DB_SSL_CA_CERT}
+    AMAZON_REGION: ${file(../env.yml):AMAZON_REGION}
+    DB_HOST: ${file(../env.yml):DB_HOST}
+    DB_NAME: ${file(../env.yml):DB_NAME}
+    DB_REPLICA_SET_NAME: ${file(../env.yml):DB_REPLICA_SET_NAME}
+    DB_USER_NAME: ${file(../env.yml):DB_USER_NAME}
+    DB_USER_PASSWORD: ${file(../env.yml):DB_USER_PASSWORD}
+    DB_SSL_CA_CERT: ${file(../env.yml):DB_SSL_CA_CERT}
 
 functions:
   example_hello_world:
