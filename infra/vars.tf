@@ -1,5 +1,7 @@
-variable "github_pat" {
+variable "GITHUB_PAT" {
   type = string
+  default = "${yamldecode(file("../env.yml"))["GITHUB_PAT"]}"
+  sensitive = true
 }
 
 variable "app_name" {
@@ -7,25 +9,28 @@ variable "app_name" {
   default = "serverless-webapp"
 }
 
-variable "DB_ADMIN_USERNAME" {
+variable "DB_USER_NAME" {
   type = string
+  default = "${yamldecode(file("../env.yml"))["DB_USER_NAME"]}"
 }
 
-variable "DB_ADMIN_PASSWORD" {
+variable "DB_USER_PASSWORD" {
   type = string
+  default = "${yamldecode(file("../env.yml"))["DB_USER_PASSWORD"]}"
+  sensitive = true
 }
 
 variable "DB_PORT" {
   type    = number
-  default = 27017
+  default = "${yamldecode(file("../env.yml"))["DB_PORT"]}"
 }
 
 variable "VPC_CIDR_BLOCK" {
   type    = string
-  default = "10.0.0.0/16"
+  default = "${yamldecode(file("../env.yml"))["VPC_CIDR_BLOCK"]}"
 }
 
 variable "VPC_NAME" {
   type    = string
-  default = "main"
+  default = "${yamldecode(file("../env.yml"))["VPC_NAME"]}"
 }

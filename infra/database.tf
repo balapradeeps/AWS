@@ -32,8 +32,8 @@ resource "aws_security_group" "allow_db_connections" {
 }
 
 resource "aws_docdb_cluster" "database_cluster" {
-  master_username        = var.DB_ADMIN_USERNAME
-  master_password        = var.DB_ADMIN_PASSWORD
+  master_username        = var.DB_USER_NAME
+  master_password        = var.DB_USER_PASSWORD
   vpc_security_group_ids = ["securitygroupsids"]
 }
 
