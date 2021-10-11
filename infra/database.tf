@@ -6,7 +6,7 @@ resource "aws_security_group" "allow_db_connections" {
     {
       description      = "allow db connections"
       from_port        = 0 # any port
-      to_port          = var.DB_PORT
+      to_port          = "${yamldecode(file("../env.yml"))["DB_PORT"]}"
       protocol         = "tcp"
       cidr_blocks      = [aws_vpc.main.cidr_block]
       ipv6_cidr_blocks = [aws_vpc.main.ipv6_cidr_block]
@@ -32,8 +32,8 @@ resource "aws_security_group" "allow_db_connections" {
 }
 
 resource "aws_docdb_cluster" "database_cluster" {
-  master_username        = var.DB_USER_NAME
-  master_password        = var.DB_USER_PASSWORD
+  master_username        = "${yamldecode(file("../env.yml"))["DB_USER_NAME"]}"
+  master_password        = "${yamldecode(file("../env.yml"))["DB_USER_PASSWORD"]}"
   vpc_security_group_ids = ["securitygroupsids"]
 }
 

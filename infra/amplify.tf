@@ -1,7 +1,7 @@
 resource "aws_amplify_app" "front_app" {
   name         = "front"
   repository   = "https://github.com/Tiino1/serverless-webapp"
-  access_token = var.GITHUB_PAT
+  access_token = "${yamldecode(file("../env.yml"))["GITHUB_PAT"]}"
 
   enable_auto_branch_creation = true
   enable_branch_auto_deletion = true

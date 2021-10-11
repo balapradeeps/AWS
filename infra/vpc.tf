@@ -1,6 +1,6 @@
 resource "aws_vpc" "main" {
-  cidr_block = var.VPC_CIDR_BLOCK
+  cidr_block = "${yamldecode(file("../env.yml"))["VPC_CIDR_BLOCK"]}"
   tags = {
-    Name = var.VPC_NAME
+    Name = "${yamldecode(file("../env.yml"))["VPC_NAME"]}"
   }
 }
