@@ -32,8 +32,8 @@ resource "aws_security_group" "allow_db_connections" {
 }
 
 resource "aws_docdb_cluster" "database_cluster" {
-  master_username        = "${yamldecode(file("../env.yml"))["DB_USER_NAME"]}"
-  master_password        = "${yamldecode(file("../env.yml"))["DB_USER_PASSWORD"]}"
+  master_username        = yamldecode(file("../env.yml"))["DB_USER_NAME"]
+  master_password        = yamldecode(file("../env.yml"))["DB_USER_PASSWORD"]
   vpc_security_group_ids = ["securitygroupsids"]
 }
 
