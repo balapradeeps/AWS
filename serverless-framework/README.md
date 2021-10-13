@@ -20,6 +20,9 @@
 # Usage
 - `serverless deploy` to deploy infra
 - `serverless remove` to remove infra
+#### Deployment failure
+Deployment can fail if the cloud formation instance is in maintenance state. In that case,
+you need to manually delete generated IAM roles before redeploying.
 
 # Dev
 ### Generate policies for lambdas
