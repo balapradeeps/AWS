@@ -16,6 +16,8 @@ provider:
   vpc:
     subnetIds:
       - ${ssm:/subnet/id}
+    securityGroupIds:
+      - ${ssm:/secgroup/id}
   environment:
     AMAZON_REGION: ${file(../env.yml):AMAZON_REGION}
     DB_HOST: ${file(../env.yml):DB_HOST}
@@ -23,8 +25,8 @@ provider:
     DB_REPLICA_SET_NAME: ${file(../env.yml):DB_REPLICA_SET_NAME}
     DB_USER_NAME: ${file(../env.yml):DB_USER_NAME}
     DB_USER_PASSWORD: ${file(../env.yml):DB_USER_PASSWORD}
-    DB_SSL_CA_CERT: ${file(../env.yml):DB_SSL_CA_CERT}
-    TEST: ${ssm:/db/dns_address}
+    DB_SSL_CA_CERT: ${file(../env.yml):DB_SSL_CA_CERT}        # not used
+    TEST: ${ssm:/db/dns_address}                              # not used
 
 functions:
   example_hello_world:

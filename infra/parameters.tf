@@ -5,6 +5,12 @@ resource "aws_ssm_parameter" "main_subnet" {
     value = aws_subnet.main_subnet.id
 }
 
+resource "aws_ssm_parameter" "main_security_group_id" {
+    name = "/secgroup/id"
+    type = "String"
+    value = aws_vpc.main_vpc.default_security_group_id  
+}
+
 resource "aws_ssm_parameter" "db_dns_address" {
     name = "/db/dns_address"
     description = "Endpoint to access database DNS address to make lambdas find the DB"
