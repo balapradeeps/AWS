@@ -1,0 +1,1 @@
+FROM amaysim/serverless:2.62.0

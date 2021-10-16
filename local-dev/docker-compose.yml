@@ -22,6 +22,16 @@ services:
     networks:
       - internal_network
 
+  serverless_framework:
+    container_name: serverless_framework
+    working_dir: /app
+    build:
+      context: .
+      dockerfile: ./build/serverless_framework/Dockerfile
+    tty: true
+    volumes:
+      - ..:/app/
+
 networks:
   internal_network:
     driver: bridge
