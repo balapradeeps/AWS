@@ -1,0 +1,21 @@
+# Test locally ruby functions
+
+### Start
+```
+source ruby.sh
+```
+
+### View logs
+```
+docker-compose logs -f -t
+```
+
+### Stop
+```
+docker-compose down
+```
+
+### Important note
+The main function of a file must have the same name of its file
+ex: File 'test_db.rb' must define a function 'test_db'
+
