@@ -12,7 +12,10 @@ function my_ruby {
 }
 
 function my_serverless {
-    # exec main function in ruby file, like in production context
+    # cp aws creddentias
+    docker cp ~/.aws/ serverless_framework:/root
+
+    # exec serverless cli
     docker exec -it serverless_framework serverless $@
 }
 
