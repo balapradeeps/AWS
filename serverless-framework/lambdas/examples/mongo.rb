@@ -30,8 +30,8 @@ def mongo(event:, context:)
    #Close the connection
    client.close
 rescue
-  # error handling
-  puts e.backtrace.inspect
-  puts e.message
-  { statusCode: 400, body: JSON[{"unexpected_error" => "#{e.message}"}]}
+   # error handling
+   puts e.backtrace.inspect
+   puts e.message
+   { statusCode: 400, body: JSON[{"unexpected_error" => "#{e.message}"}]}
 end

@@ -13,11 +13,11 @@ require 'json'
 #     [-f|--function] hello_world
 
 def hello_world(event:, context:)
-  team = "Gwaihir"
-  body = "Hello World ! #{team} is here !"        # variable expansion
-  { statusCode: 200, body: JSON.generate(body) }  # implicit return (last statement)
+    team = "Gwaihir"
+    body = "Hello World ! #{team} is here !"        # variable expansion
+    { statusCode: 200, body: JSON.generate(body) }  # implicit return (last statement)
 rescue StandardError => e                         # C equivalent for try/catch
-  puts e.message                                  # print in the console
-  puts e.backtrace.inspect
-  { statusCode: 400, body: JSON[{"unexpected_error" => "#{e.message}"}]} # implicit return (last statement)
+    puts e.message                                  # print in the console
+    puts e.backtrace.inspect
+    { statusCode: 400, body: JSON[{"unexpected_error" => "#{e.message}"}]} # implicit return (last statement)
 end

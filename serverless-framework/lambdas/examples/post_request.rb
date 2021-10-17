@@ -13,46 +13,46 @@ require 'json'
 # More info about CLI arguments: https://www.serverless.com/framework/docs/providers/aws/cli-reference/invoke
 
 def post_request(event:, context:)
-  # extract parameters
-  id = event['pathParameters']['id']        # path parameter
-  if not id
-    return { statusCode: 400, body: JSON.generate("Bad request. Please provide an id") }
-  end
+    # extract parameters
+    id = event['pathParameters']['id']        # path parameter
+    if not id
+        return { statusCode: 400, body: JSON.generate("Bad request. Please provide an id") }
+    end
 
-  body = event['body']
-  if not body
-    return { statusCode: 400, body: JSON[{'error_message': 'Please provide a body'}]}
-  end
-  if not body.class == String   # when doing local testing: body is already a Hash
-    body = body.to_json         # in production: body is a string corresponding to a JSON object
-  end
-  body = JSON.parse(body, object_class: OpenStruct)   # construct an object from the string
+    body = event['body']
+    if not body
+        return { statusCode: 400, body: JSON[{'error_message': 'Please provide a body'}]}
+    end
+    if not body.class == String   # when doing local testing: body is already a Hash
+        body = body.to_json         # in production: body is a string corresponding to a JSON object
+    end
+    body = JSON.parse(body, object_class: OpenStruct)   # construct an object from the string
 
-  number = body.number
+    number = body.number
 
-  hit = event['queryStringParameters']['hit']
-  if not hit
-    return { statusCode: 400, body: JSON.generate("Bad request. Please provide an id") }
-  end
+    hit = event['queryStringParameters']['hit']
+    if not hit
+        return { statusCode: 400, body: JSON.generate("Bad request. Please provide an id") }
+    end
 
-  hot = event['queryStringParameters']['hot']   # optional querystring parameter (not defined in serverless.yml)
+    hot = event['queryStringParameters']['hot']   # optional querystring parameter (not defined in serverless.yml)
 
-  # operations
-  response = {                            # Object response type is Hash (equivalent to a dictionnary in python)
-    'id' => "#{id}",
-    'thing' => {
-      'hit' => "oh yeah that's #{hit}",
-      'number' => number
+    # operations
+    response = {                            # Object response type is Hash (equivalent to a dictionnary in python)
+        'id' => "#{id}",
+        'thing' => {
+            'hit' => "oh yeah that's #{hit}",
+            'number' => number
+        }
     }
-  }
-  if hot
-    response[:hot] = 23434                  # insert 'hit' field
-  end
+    if hot
+        response[:hot] = 23434                  # insert 'hit' field
+    end
 
-  { statusCode: 200, body: JSON[response] }
+    { statusCode: 200, body: JSON[response] }
 rescue StandardError => e
-  # unexpected error handling
-  puts e.message  
-  puts e.backtrace.inspect
-  { statusCode: 400, body: JSON[{"unexpected_error" => "#{e.message}"}]}
+    # unexpected error handling
+    puts e.message  
+    puts e.backtrace.inspect
+    { statusCode: 400, body: JSON[{"unexpected_error" => "#{e.message}"}]}
 end
