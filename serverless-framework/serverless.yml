@@ -2,7 +2,7 @@ service: nlpf
 
 frameworkVersion: '2'
 
-configValidationMode: error
+# configValidationMode: error
 
 projectDir: ../   # because env.yml is defined in ../
 
@@ -13,20 +13,19 @@ provider:
   timeout: 5
   stage: production   # used by API Gateway (1 gateway per stage)
   region: ${file(../env.yml):AMAZON_REGION}
-  vpc:
-    subnetIds:
-      - ${ssm:/subnet/id}
-    securityGroupIds:
-      - ${ssm:/secgroup/id}
+  # vpc:
+  #   subnetIds:
+  #     - ${ssm:/subnet/id}
+  #   securityGroupIds:
+  #     - ${ssm:/secgroup/id}
   environment:
     AMAZON_REGION: ${file(../env.yml):AMAZON_REGION}
     DB_HOST: ${file(../env.yml):DB_HOST}
     DB_NAME: ${file(../env.yml):DB_NAME}
+    DB_PORT: ${file(../env.yml):DB_PORT}
     DB_REPLICA_SET_NAME: ${file(../env.yml):DB_REPLICA_SET_NAME}
     DB_USER_NAME: ${file(../env.yml):DB_USER_NAME}
     DB_USER_PASSWORD: ${file(../env.yml):DB_USER_PASSWORD}
-    DB_SSL_CA_CERT: ${file(../env.yml):DB_SSL_CA_CERT}        # not used
-    TEST: ${ssm:/db/dns_address}                              # not used
 
 functions:
   example_hello_world:
@@ -56,13 +55,21 @@ functions:
           path: test/mongo
           method: post
 
-  mutation_create:
-    role: dynamodbIAMRole   # aws role policy, declared in this file in resource.Resources.dynamodbIAMRole
-    handler: lambdas/mutation_create.mutation_create
+  # mutation_create:
+  #   role: dynamodbIAMRole   # aws role policy, declared in this file in resource.Resources.dynamodbIAMRole
+  #   handler: lambdas/mutation_create.mutation_create
+  #   events:
+  #     - http:
+  #         path: mutation
+  #         method: post
+
+  docdb_connection:
+    handler: lambdas/examples/docdb_connection.docdb_connection     # function to call
     events:
       - http:
-          path: mutation
+          path: test/docdb_connection
           method: post
+
 
 resources:
   Resources:
@@ -86,6 +93,5 @@ resources:
               Statement:
                 - Effect: Allow
                   Action:
-                    - dynamodb:ListTables
-                    - dynamodb:Scan
+                    - ec2:CreateNetworkInterface
                   Resource: "*"
