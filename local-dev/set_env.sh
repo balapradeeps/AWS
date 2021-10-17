@@ -8,7 +8,7 @@ function my_ruby {
     docker cp "$1" ruby:/app/"${FILE_EXT}"
 
     # exec main function in ruby file, like in production context
-    docker exec -it ruby ruby -r "./${FILE_EXT}" -e "${FILE}(event: nil, context: nil)"
+    return docker exec -it ruby ruby -r "./${FILE_EXT}" -e "${FILE}(event: nil, context: nil)"
 }
 
 function my_serverless {
@@ -16,7 +16,7 @@ function my_serverless {
     docker cp ~/.aws/ serverless_framework:/root
 
     # exec serverless cli
-    docker exec -it serverless_framework serverless $@
+    return docker exec -it serverless_framework serverless $@
 }
 
 docker-compose up -d
